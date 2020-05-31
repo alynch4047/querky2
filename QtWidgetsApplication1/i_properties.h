@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <functional>
 
 #include <QString>
 #include <QList>
@@ -20,9 +21,12 @@ public:
     virtual const std::string get_data_type_id() override { return "PROPERTY"; };
 
     QString name;
-    QString& val;
+    std::function<QVariant()> getter;
+    std::function<void(QVariant)> setter;
 
-   Property(const QString& name, QString& val) : name(name), val(val) {};
+   Property(const QString& name, 
+       std::function<QVariant()> getter,
+       std::function<void(QVariant)> setter) : name(name), getter(getter), setter(setter) {};
 
 };
 
@@ -37,12 +41,12 @@ struct PropertyToITreeData : Adapter<Property, ITreeData> {
         return children;
     }
     virtual QVariant data(int column) const {
-        if (column == 1) return adaptee->val;
+        if (column == 1) return adaptee->getter();
         else return "TBD";
     }
     virtual bool is_editable(int column) const { return true; }
     virtual bool set_data(int column, QVariant value) const { 
-        adaptee->val = value.toString();
+        adaptee->setter(value);
         return true;
     };
 };
