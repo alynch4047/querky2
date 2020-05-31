@@ -13,12 +13,12 @@ class TreeDataModel;
 
 class Node {
 public:
-    const Data* data = nullptr;
+    const IAdaptable* data = nullptr;
 
     Node* parent = nullptr;
 
     Node() {};
-    Node(const Data* data, Node* parent=nullptr) : data(data), parent(parent) {};
+    Node(const IAdaptable* data, Node* parent=nullptr) : data(data), parent(parent) {};
 
     QList<Node*> children;
 
@@ -26,7 +26,7 @@ public:
         qDeleteAll(children);
     }
 
-    void add_child(const Data* data) {
+    void add_child(const IAdaptable* data) {
         children.append(new Node(data, this));
     }
 
@@ -34,23 +34,23 @@ public:
 
     void refresh(TreeDataModel& model);
 
-    QList<const Data*> get_child_data();
+    QList<const IAdaptable*> get_child_data();
 
 };
 
 class TreeDataModel : public QAbstractItemModel {
 public:
 
-    TreeDataModel(const QList<Data*>& objects) : root_node(new Node()) { 
+    TreeDataModel(const QList<IAdaptable*>& objects) : root_node(new Node()) {
         headers = { "Name" }; 
     }
 
     Node* root_node;
     QList<QString> headers;
 
-    void add_top_level_object(const Data* data);
-    void add_child_data(Node* node, const Data* child_data);
-    const Data* get_data(QModelIndex index) {
+    void add_top_level_object(const IAdaptable* data);
+    void add_child_data(Node* node, const IAdaptable* child_data);
+    const IAdaptable* get_data(QModelIndex index) {
         if (!index.isValid()) return nullptr;
         Node* node = static_cast<Node*>(index.internalPointer());
         return node->data;
@@ -85,7 +85,7 @@ public:
 
     std::unique_ptr<QItemSelectionModel> selection_model;
 
-    void add_top_level_object(const Data* data);
+    void add_top_level_object(const IAdaptable* data);
 
     void refresh() { model.refresh(); }
 

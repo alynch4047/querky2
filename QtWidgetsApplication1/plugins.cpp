@@ -12,7 +12,7 @@
 #include "plugins.h"
 
 
-QList<Data*> make_data() {
+QList<IAdaptable*> make_data() {
 
     Emp* e1 = new Emp{ "jim", 5000 };
     Emp* e2 = new Emp{ "paul", 2000 };
@@ -22,7 +22,7 @@ QList<Data*> make_data() {
     e1->books.append(b1);
     e1->books.append(b2);
 
-    QList<Data*> data = QList<Data*>();
+    QList<IAdaptable*> data = QList<IAdaptable*>();
     data.push_back(e1);
     data.push_back(b1);
     data.push_back(e2);

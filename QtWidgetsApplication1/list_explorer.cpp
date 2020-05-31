@@ -15,7 +15,7 @@ int ListExplorerModel::columnCount(const QModelIndex& parent) const { return 1; 
 QVariant ListExplorerModel::data(const QModelIndex& index, int role) const {
     if (!index.isValid()) return QVariant();
 
-    Data* data = (*objects)[index.row()];
+    IAdaptable* data = (*objects)[index.row()];
     IDisplay* i_display = adapt<IDisplay>(data);
 
     if (role == Qt::DisplayRole) {

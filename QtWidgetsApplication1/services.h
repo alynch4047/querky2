@@ -8,7 +8,7 @@
 class Services
 {
 	public:
-	QList<Data*> all_objects;
+	QList<IAdaptable*> all_objects;
 	Selection selection;
 };
 

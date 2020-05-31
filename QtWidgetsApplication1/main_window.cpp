@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
     load_plugins();
 
     // load initial data
-    QList<Data*> data = make_data();
-    for (Data* d : data) {
+    QList<IAdaptable*> data = make_data();
+    for (IAdaptable* d : data) {
         services.all_objects.append(d);
     };
 

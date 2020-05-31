@@ -13,12 +13,13 @@
 #include "i_treedata.h"
 
 
-class Emp : public Data {
+class Emp : public IAdaptable {
 public:
     const static std::string data_type_id;
     virtual const std::string get_data_type_id() override { return "EMP"; };
-    Emp(QString name, int salary) : Data(name), salary(salary) {};
+    Emp(QString name, int salary) : name(name), salary(salary) {};
 
+    QString name;
     int salary;
     QList<Book*> books;
 };
@@ -36,8 +37,8 @@ struct EmpToIDisplay : Adapter<Emp, IDisplay> {
 };
 
 struct EmpToITreeData : Adapter<Emp, ITreeData> {
-    virtual QList<Data*> get_children() const {
-        QList<Data*> children;
+    virtual QList<IAdaptable*> get_children() const {
+        QList<IAdaptable*> children;
         for (auto* book : adaptee->books) {
             children.append(book);
         }

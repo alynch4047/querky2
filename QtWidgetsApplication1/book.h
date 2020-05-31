@@ -9,12 +9,13 @@
 #include "i_treedata.h"
 #include "plugin.h"
 
-class Book : public Data {
+class Book : public IAdaptable {
 public:
     const static std::string data_type_id;
     virtual const std::string get_data_type_id() override { return "BOOK"; };
-    Book(QString name, QString author, int num_pages) : Data(name), author(author), num_pages(num_pages) {};
+    Book(QString name, QString author, int num_pages) : name(name), author(author), num_pages(num_pages) {};
 
+    QString name;
     QString author;
     int num_pages;
 };
@@ -34,8 +35,8 @@ struct BookToIDisplay : Adapter<Book, IDisplay> {
 };
 
 struct BookToITreeData : Adapter<Book, ITreeData> {
-    virtual QList<Data*> get_children() const {
-        QList<Data*> children;
+    virtual QList<IAdaptable*> get_children() const {
+        QList<IAdaptable*> children;
         return children;
     };
     virtual QVariant data(int column) const { return "TBD"; };

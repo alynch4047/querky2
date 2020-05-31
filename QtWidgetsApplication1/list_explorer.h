@@ -11,9 +11,9 @@
 class ListExplorerModel : public QAbstractItemModel {
 public:
 
-    ListExplorerModel(const QList<Data*>* objects) : objects(objects) {};
+    ListExplorerModel(const QList<IAdaptable*>* objects) : objects(objects) {};
 
-    const QList<Data*>* objects;
+    const QList<IAdaptable*>* objects;
 
     virtual QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
     virtual QModelIndex parent(const QModelIndex& child) const override;

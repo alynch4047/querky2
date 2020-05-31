@@ -15,11 +15,10 @@ public:
 
     void when_selection_changed(const QItemSelection& selected, const QItemSelection& deselected) {
         QModelIndex index = selected.indexes()[0];
-        const Data* data = model.get_data(index);
+        const IAdaptable* data = model.get_data(index);
         if (data == nullptr) qInfo() << "null data selected";
         else {
-            QString name = data->name;
-            qInfo() << "selection changed " << name;
+            qInfo() << "selection changed " ;
             services->selection.set_selection(data);
         }
     };

@@ -5,8 +5,8 @@
 #include "icon.h"
 #include "adapt.h"
 
-QList<const Data*> Node::get_child_data() {
-    QList<const Data*> child_data_;
+QList<const IAdaptable*> Node::get_child_data() {
+    QList<const IAdaptable*> child_data_;
     for (Node* child_node : children) {
         child_data_.append(child_node->data);
     }
@@ -21,29 +21,29 @@ void Node::clear() {
 
 void Node::refresh(TreeDataModel& model) {
     if (data != nullptr) {
-        Data* data_ = const_cast<Data*>(data);
+        IAdaptable* data_ = const_cast<IAdaptable*>(data);
         ITreeData* i_tree_data = adapt<ITreeData>(data_);
         if (i_tree_data == nullptr) return;
-        QList<Data*> new_children = i_tree_data->get_children();
+        QList<IAdaptable*> new_children = i_tree_data->get_children();
         QList<const Node*> to_remove;
-        QList<const Data*> to_add;
+        QList<const IAdaptable*> to_add;
         // check for removed nodes
         for (const Node* child_node: children) {
-            Data* child_data = const_cast<Data*>(child_node->data);
+            IAdaptable* child_data = const_cast<IAdaptable*>(child_node->data);
             if (new_children.indexOf(child_data) == -1) {
                 // this node was removed
                 to_remove.append(child_node);
             }
         }
         // check for added nodes
-        QList<const Data*> child_data = get_child_data();
-        for (const Data* new_child_data : new_children) {
+        QList<const IAdaptable*> child_data = get_child_data();
+        for (const IAdaptable* new_child_data : new_children) {
             if (child_data.indexOf(new_child_data) == -1) {
                 to_add.append(new_child_data);
             }
         }
 
-        for (const Data* new_data : to_add) {
+        for (const IAdaptable* new_data : to_add) {
             model.add_child_data(this, new_data);
         }
     }
@@ -52,7 +52,7 @@ void Node::refresh(TreeDataModel& model) {
     }
 }
 
-void TreeDataModel::add_child_data(Node* node, const Data* child_data) {
+void TreeDataModel::add_child_data(Node* node, const IAdaptable* child_data) {
     Node* parent_node = node->parent;
     if (parent_node == nullptr) {
         return;
@@ -65,7 +65,7 @@ void TreeDataModel::add_child_data(Node* node, const Data* child_data) {
     endInsertRows();
 }
 
-void TreeDataModel::add_top_level_object(const Data* data) {
+void TreeDataModel::add_top_level_object(const IAdaptable* data) {
     int row = root_node->children.size();
     QModelIndex root_index = QModelIndex();
     beginInsertRows(root_index, row, row);
@@ -142,7 +142,7 @@ QVariant TreeDataModel::data(const QModelIndex& index, int role) const {
     if (!index.isValid()) return QVariant();
 
     Node* node  = static_cast<Node*>(index.internalPointer());
-    Data* data = const_cast<Data*>(node->data);
+    IAdaptable* data = const_cast<IAdaptable*>(node->data);
 
     ITreeData* i_tree_data = adapt<ITreeData>(data);
     if (i_tree_data == nullptr) return QVariant();
@@ -168,6 +168,6 @@ QVariant TreeDataModel::data(const QModelIndex& index, int role) const {
     }
 };
 
-void TreeDataView::add_top_level_object(const Data* data) {
+void TreeDataView::add_top_level_object(const IAdaptable* data) {
     model.add_top_level_object(data);
 }

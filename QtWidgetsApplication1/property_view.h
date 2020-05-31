@@ -18,11 +18,11 @@ public:
 
     QList<std::shared_ptr<Property>> current_properties;
 
-    void when_selection_changed(const Data* selection) {
-        qInfo() << "services selection changed " << selection->name;
+    void when_selection_changed(const IAdaptable* selection) {
+        qInfo() << "services selection changed ";
         model.clear();
 
-        Data* data = const_cast<Data*>(selection);
+        IAdaptable* data = const_cast<IAdaptable*>(selection);
 
         IProperties* i_properties = adapt<IProperties>(data);
         if (i_properties == nullptr) return;

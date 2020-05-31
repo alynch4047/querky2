@@ -12,20 +12,21 @@
 #include "plugin.h"
 
 
-class Property: public Data {
+class Property: public IAdaptable {
 public:
 
     const static std::string data_type_id;
     virtual const std::string get_data_type_id() override { return "PROPERTY"; };
 
+    QString name;
     QString val;
 
-    Property(const QString& name, QString& val) : Data(name), val(val) {};
-    Property(const Property& property) : Data(property.name), val(property.val) {};
+   Property(const QString& name, QString& val) : name(name), val(val) {};
+   /* Property(const Property& property) : name(property.name), val(property.val) {};
     Property& operator= (const Property& property) {
         name = property.name;
         val = property.val;
-    }
+    }*/
 };
 
 struct PropertyToIDisplay : Adapter<Property, IDisplay> {
@@ -34,8 +35,8 @@ struct PropertyToIDisplay : Adapter<Property, IDisplay> {
 };
 
 struct PropertyToITreeData : Adapter<Property, ITreeData> {
-    virtual QList<Data*> get_children() const {
-        QList<Data*> children;
+    virtual QList<IAdaptable*> get_children() const {
+        QList<IAdaptable*> children;
         return children;
     };
     virtual QVariant data(int column) const {

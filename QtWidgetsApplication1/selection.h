@@ -11,15 +11,15 @@ class Selection: public QObject
 	Q_OBJECT
 
 public:
-	const Data* selected;
-	QList<Data*> checked;
+	const IAdaptable* selected;
+	QList<IAdaptable*> checked;
 
-	void set_selection(const Data* selection) {
+	void set_selection(const IAdaptable* selection) {
 		selected = selection;
 		emit selectionChanged(selection);
 	}
 
 signals:
-	void selectionChanged(const Data* selected);
+	void selectionChanged(const IAdaptable* selected);
 };
 

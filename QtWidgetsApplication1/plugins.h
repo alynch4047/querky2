@@ -4,4 +4,4 @@
 #include "data.h"
 
 void load_plugins();
-QList<Data*> make_data();
+QList<IAdaptable*> make_data();
