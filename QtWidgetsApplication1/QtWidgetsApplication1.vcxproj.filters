@@ -74,9 +74,9 @@
     <ClCompile Include="property_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtRcc Include="QtWidgetsApplication1.qrc" />
+    <ClCompile Include="i_properties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="adapt.h">

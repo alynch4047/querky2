@@ -23,6 +23,7 @@ void Node::refresh(TreeDataModel& model) {
     if (data != nullptr) {
         Data* data_ = const_cast<Data*>(data);
         ITreeData* i_tree_data = adapt<ITreeData>(data_);
+        if (i_tree_data == nullptr) return;
         QList<Data*> new_children = i_tree_data->get_children();
         QList<const Node*> to_remove;
         QList<const Data*> to_add;
@@ -144,7 +145,9 @@ QVariant TreeDataModel::data(const QModelIndex& index, int role) const {
     Data* data = const_cast<Data*>(node->data);
 
     ITreeData* i_tree_data = adapt<ITreeData>(data);
+    if (i_tree_data == nullptr) return QVariant();
     IDisplay* i_display = adapt<IDisplay>(data);
+    if (i_display == nullptr) return QVariant();
 
     if (role == Qt::DisplayRole) {
         if (index.column() == 0) {

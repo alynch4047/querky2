@@ -33,6 +33,7 @@ template<typename Interface, typename Adaptee> Interface* adapt(Adaptee* obj) {
     auto ti_interface = &typeid(Interface);
     auto ti_adaptee = obj->get_data_type_id();
     const auto key = std::make_pair(ti_adaptee, ti_interface);
+    if (adapters.count(key) == 0) return nullptr;
     auto* adapter = static_cast<Adapter<Adaptee, Interface>*>(adapters[key]);
     adapter->setAdaptee(obj);
     return adapter;

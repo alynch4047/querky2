@@ -35,6 +35,7 @@ void load_plugins()
     std::vector<Plugin*> plugins;
     plugins.push_back(new EmpPlugin());
     plugins.push_back(new BookPlugin());
+    plugins.push_back(new PropertyPlugin());
 
     for (auto plugin : plugins) {
         plugin->register_adapters();
