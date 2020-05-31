@@ -9,11 +9,14 @@
 class PropertyView :
     public TreeDataView
 {
+    Q_OBJECT
+
 public:
 
     PropertyView(QWidget* parent, QList<QString> headers, Services* services) :
         TreeDataView(parent, headers, services) {
         QObject::connect(&services->selection, &Selection::selectionChanged, this, &PropertyView::when_selection_changed);
+        QObject::connect(this, &PropertyView::data_changed, this->services, &Services::data_changed);
     }
 
     QList<std::shared_ptr<Property>> current_properties;
@@ -33,6 +36,11 @@ public:
         }
         
         refresh();
+
+        emit data_changed();
     }
+
+signals:
+    void data_changed();
 };
 

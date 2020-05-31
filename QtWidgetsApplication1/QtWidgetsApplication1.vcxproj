@@ -113,9 +113,9 @@
     <ClInclude Include="i_treedata.h" />
     <ClInclude Include="list_explorer.h" />
     <ClInclude Include="plugin.h" />
-    <ClInclude Include="property_view.h" />
+    <QtMoc Include="property_view.h" />
     <QtMoc Include="selection.h" />
-    <ClInclude Include="services.h" />
+    <QtMoc Include="services.h" />
     <ClInclude Include="tree_data_view.h" />
     <ClInclude Include="tree_explorer.h" />
   </ItemGroup>

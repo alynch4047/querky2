@@ -50,6 +50,8 @@ public:
 
     void add_top_level_object(const IAdaptable* data);
     void add_child_data(Node* node, const IAdaptable* child_data);
+    void update_data(Node* node, const IAdaptable* child_data);
+    void remove_child_node(Node* node, Node* child_node);
     const IAdaptable* get_data(QModelIndex index) {
         if (!index.isValid()) return nullptr;
         Node* node = static_cast<Node*>(index.internalPointer());
@@ -69,9 +71,9 @@ public:
     virtual int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     virtual int columnCount(const QModelIndex& parent = QModelIndex()) const override;
     virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
-    virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-    virtual Qt::ItemFlags flags(const QModelIndex& index) const;
-    virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    virtual Qt::ItemFlags flags(const QModelIndex& index) const override;
+    virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
 };
 
 
@@ -101,9 +103,6 @@ public:
     }
 
     Services* services;
-
-
-
 
 };
 

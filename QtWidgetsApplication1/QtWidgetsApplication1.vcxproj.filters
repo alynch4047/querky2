@@ -94,9 +94,6 @@
     <ClInclude Include="plugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="services.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="list_explorer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -115,9 +112,6 @@
     <ClInclude Include="tree_explorer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="property_view.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="plugins.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -127,6 +121,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="main_window.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="property_view.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="services.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

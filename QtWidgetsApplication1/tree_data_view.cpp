@@ -27,10 +27,11 @@ void Node::refresh(TreeDataModel& model) {
         ITreeData* i_tree_data = adapt<ITreeData>(data_);
         if (i_tree_data == nullptr) return;
         QList<IAdaptable*> new_children = i_tree_data->get_children();
-        QList<const Node*> to_remove;
+        QList<Node*> to_remove;
+        QList<const IAdaptable*> to_update;
         QList<const IAdaptable*> to_add;
         // check for removed nodes
-        for (const Node* child_node: children) {
+        for (Node* child_node: children) {
             IAdaptable* child_data = const_cast<IAdaptable*>(child_node->data);
             if (new_children.indexOf(child_data) == -1) {
                 // this node was removed
@@ -43,15 +44,52 @@ void Node::refresh(TreeDataModel& model) {
             if (child_data.indexOf(new_child_data) == -1) {
                 to_add.append(new_child_data);
             }
+            else {
+                to_update.append(new_child_data);
+            }
         }
 
         for (const IAdaptable* new_data : to_add) {
             model.add_child_data(this, new_data);
         }
+
+        for (Node* old_node : to_remove) {
+            model.remove_child_node(this, old_node);
+        }
+
+        for (const IAdaptable* data : to_update) {
+            model.update_data(this, data);
+        }
+
+        
     }
     for (Node* child : children) {
         child->refresh(model);
     }
+}
+
+void TreeDataModel::remove_child_node(Node* parent_node, Node* child_node) {
+    if (parent_node == root_node) {
+        return;
+    }
+
+    int row = parent_node->children.indexOf(child_node);
+    QModelIndex parent_index = createIndex(row, 0, parent_node);
+    beginRemoveRows(parent_index, row, row);
+    parent_node->children.removeOne(child_node);
+    endRemoveRows();
+}
+
+void TreeDataModel::update_data(Node* parent_node, const IAdaptable* child_data) {
+    for (int row = 0; row < parent_node->children.size(); ++row) {
+        if (parent_node->children[row]->data == child_data) {
+            QModelIndex index = createIndex(row, 0, parent_node->children[row]);
+            emit dataChanged(index, index);
+            break;
+        }
+
+    }
+    
 }
 
 void TreeDataModel::add_child_data(Node* node, const IAdaptable* child_data) {
@@ -118,7 +156,6 @@ int TreeDataModel::rowCount(const QModelIndex& parent) const {
         if (parent.column() > 0) return 0;
         Node* parent_node = static_cast<Node*>(parent.internalPointer());
         return parent_node->children.size();
-        
     }
     else {
         return root_node->children.size();

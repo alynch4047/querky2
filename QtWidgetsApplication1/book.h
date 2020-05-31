@@ -28,7 +28,10 @@ struct BookToIProperties : Adapter<Book, IProperties> {
                 [this](QVariant v) {adaptee->name = v.toString(); }) ,
                 std::make_shared<Property>("author",
                 [this]() {return adaptee->author; },
-                [this](QVariant v) {adaptee->author = v.toString(); })
+                [this](QVariant v) {adaptee->author = v.toString(); }),
+                std::make_shared<Property>("pages",
+                [this]() {return adaptee->num_pages; },
+                [this](QVariant v) {adaptee->num_pages = v.toInt(); })
             };
     }
 };
