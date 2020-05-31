@@ -1,4 +1,4 @@
-#include "QtWidgetsApplication1.h"
+#include "main_window.h"
 #include <QtWidgets/QApplication>
 #include <QtGui/QFont>
 
@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     font.setPixelSize(12);
     qApp->setFont(font);
 
-    QtWidgetsApplication1 w;
+    MainWindow w;
     w.show();
     return a.exec();
 }

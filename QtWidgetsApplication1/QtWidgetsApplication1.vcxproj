@@ -92,13 +92,13 @@
     <ClCompile Include="tree_data_view.cpp" />
     <ClCompile Include="tree_explorer.cpp" />
     <QtUic Include="QtWidgetsApplication1.ui" />
-    <QtMoc Include="QtWidgetsApplication1.h" />
+    <QtMoc Include="main_window.h" />
     <ClCompile Include="adapters.cpp" />
     <ClCompile Include="book.cpp" />
     <ClCompile Include="plugins.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="emp.cpp" />
-    <ClCompile Include="QtWidgetsApplication1.cpp" />
+    <ClCompile Include="main_window.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

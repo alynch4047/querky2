@@ -1,5 +1,5 @@
 
-#include "QtWidgetsApplication1.h"
+#include "main_window.h"
 
 #include <QObject>
 #include <QString>
@@ -16,7 +16,7 @@
 #include "tree_explorer.h"
 
 
-QtWidgetsApplication1::QtWidgetsApplication1(QWidget *parent): QMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 {
     ui.setupUi(this);
 
@@ -33,7 +33,7 @@ QtWidgetsApplication1::QtWidgetsApplication1(QWidget *parent): QMainWindow(paren
 }
 
 
-void QtWidgetsApplication1::create_docks(Services* services) {
+void MainWindow::create_docks(Services* services) {
 
     QDockWidget* dock = new QDockWidget("List Explorer", this);
     ListExplorer* list_explorer = new ListExplorer(dock, services);
@@ -55,6 +55,5 @@ void QtWidgetsApplication1::create_docks(Services* services) {
     addDockWidget(Qt::RightDockWidgetArea, dock);
 }
 
-void QtWidgetsApplication1::testSlot() {
-}
+
 
