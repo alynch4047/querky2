@@ -24,7 +24,8 @@ struct BookToIProperties : Adapter<Book, IProperties> {
     QList<std::shared_ptr<Property>> get_properties() const override {
             return {
                 std::make_shared<Property>("name", adaptee->name), 
-                std::make_shared<Property>("author", adaptee->author) 
+                std::make_shared<Property>("author", adaptee->author),
+                //std::make_shared<Property>("pages", adaptee->num_pages)
             };
     }
 };
@@ -40,9 +41,8 @@ struct BookToITreeData : Adapter<Book, ITreeData> {
         return children;
     }
     virtual QVariant data(int column) const { return "TBD"; }
-    virtual bool is_editable(int column) const {
-        return false;
-    }
+    virtual bool is_editable(int column) const { return false; }
+    virtual bool set_data(int column, QVariant value) const { return false; };
 };
 
 struct BookPlugin : public Plugin {

@@ -46,6 +46,7 @@ struct EmpToITreeData : Adapter<Emp, ITreeData> {
     }
     virtual QVariant data(int column) const { return adaptee->salary; }
     virtual bool is_editable(int column) const { return false; }
+    virtual bool set_data(int column, QVariant value) const { return false; };
 };
 
 

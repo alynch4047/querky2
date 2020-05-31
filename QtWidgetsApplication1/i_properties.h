@@ -4,6 +4,7 @@
 
 #include <QString>
 #include <QList>
+#include <QDebug>
 
 #include "data.h"
 #include "adapt.h"
@@ -19,7 +20,7 @@ public:
     virtual const std::string get_data_type_id() override { return "PROPERTY"; };
 
     QString name;
-    QString val;
+    QString& val;
 
    Property(const QString& name, QString& val) : name(name), val(val) {};
 
@@ -40,7 +41,13 @@ struct PropertyToITreeData : Adapter<Property, ITreeData> {
         else return "TBD";
     }
     virtual bool is_editable(int column) const { return true; }
+    virtual bool set_data(int column, QVariant value) const { 
+        adaptee->val = value.toString();
+        return true;
+    };
 };
+
+
 
 
 struct IProperties {

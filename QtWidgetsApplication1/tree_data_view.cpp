@@ -1,5 +1,7 @@
-#include "tree_data_view.h"
 
+#include <QDebug>
+
+#include "tree_data_view.h"
 #include "i_display.h"
 #include "i_treedata.h"
 #include "icon.h"
@@ -147,15 +149,21 @@ Qt::ItemFlags TreeDataModel::flags(const QModelIndex& index) const {
     return flags;
 }
 
+bool TreeDataModel::setData(const QModelIndex& index, const QVariant& value, int role) {
+    
+    ITreeData* i_tree_data = get_i_data<ITreeData>(index);
+    qDebug() << "set data " << index << role << i_tree_data << value;
+    if (role != Qt::EditRole || i_tree_data == nullptr) return false;
+    return i_tree_data->set_data(index.column(), value);
+}
+
+
 QVariant TreeDataModel::data(const QModelIndex& index, int role) const {
     if (!index.isValid()) return QVariant();
-
-    Node* node  = static_cast<Node*>(index.internalPointer());
-    IAdaptable* data = const_cast<IAdaptable*>(node->data);
-
-    ITreeData* i_tree_data = adapt<ITreeData>(data);
+ 
+    ITreeData* i_tree_data = get_i_data<ITreeData>(index);
     if (i_tree_data == nullptr) return QVariant();
-    IDisplay* i_display = adapt<IDisplay>(data);
+    IDisplay* i_display = get_i_data<IDisplay>(index);
     if (i_display == nullptr) return QVariant();
 
     if (role == Qt::DisplayRole) {
