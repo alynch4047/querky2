@@ -13,6 +13,8 @@ template<typename AdapteeType, typename Interface> struct Adapter: Interface {
     typedef AdapteeType Adaptee;
     typedef Interface Interface;
 
+    static_assert(std::is_base_of<IAdaptable, Adaptee>::value, "Adaptee must derive from IAdaptable"); 
+
     AdapteeType* adaptee = nullptr;
 
     void setAdaptee(AdapteeType* obj) {

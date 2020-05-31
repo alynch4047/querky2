@@ -22,11 +22,7 @@ public:
     QString val;
 
    Property(const QString& name, QString& val) : name(name), val(val) {};
-   /* Property(const Property& property) : name(property.name), val(property.val) {};
-    Property& operator= (const Property& property) {
-        name = property.name;
-        val = property.val;
-    }*/
+
 };
 
 struct PropertyToIDisplay : Adapter<Property, IDisplay> {
@@ -38,11 +34,12 @@ struct PropertyToITreeData : Adapter<Property, ITreeData> {
     virtual QList<IAdaptable*> get_children() const {
         QList<IAdaptable*> children;
         return children;
-    };
+    }
     virtual QVariant data(int column) const {
         if (column == 1) return adaptee->val;
         else return "TBD";
-    };
+    }
+    virtual bool is_editable(int column) const { return true; }
 };
 
 

@@ -138,6 +138,15 @@ void TreeDataModel::set_headers(QList<QString> headers) {
     this->headers = headers;
 }
 
+Qt::ItemFlags TreeDataModel::flags(const QModelIndex& index) const {
+    Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    if (index.column() > 0) {
+        ITreeData* i_tree_data = get_i_data<ITreeData>(index);
+        if (i_tree_data->is_editable(index.column())) flags |= Qt::ItemIsEditable;
+    }
+    return flags;
+}
+
 QVariant TreeDataModel::data(const QModelIndex& index, int role) const {
     if (!index.isValid()) return QVariant();
 
@@ -159,7 +168,7 @@ QVariant TreeDataModel::data(const QModelIndex& index, int role) const {
     }
     else if (role == Qt::DecorationRole && index.column() == 0) {
         QString& icon_name = i_display->get_icon_name();
-        if (icon_name == nullptr || icon_name == "") return QVariant();
+        if (icon_name == "") return QVariant();
         const QIcon& icon = get_icon(icon_name);
         return icon;
     }

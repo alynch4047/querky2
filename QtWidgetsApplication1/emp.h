@@ -43,8 +43,9 @@ struct EmpToITreeData : Adapter<Emp, ITreeData> {
             children.append(book);
         }
         return children;
-    };
-    virtual QVariant data(int column) const { return adaptee->salary; };
+    }
+    virtual QVariant data(int column) const { return adaptee->salary; }
+    virtual bool is_editable(int column) const { return false; }
 };
 
 
