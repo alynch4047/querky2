@@ -159,6 +159,7 @@ QVariant TreeDataModel::data(const QModelIndex& index, int role) const {
     }
     else if (role == Qt::DecorationRole && index.column() == 0) {
         QString& icon_name = i_display->get_icon_name();
+        if (icon_name == nullptr || icon_name == "") return QVariant();
         const QIcon& icon = get_icon(icon_name);
         return icon;
     }

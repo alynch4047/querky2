@@ -25,8 +25,8 @@ public:
 
 
 struct EmpToIProperties : Adapter<Emp, IProperties> {
-    QList<Property> get_properties() const override {
-        return { Property("name", adaptee->name) };
+    QList<std::shared_ptr<Property>> get_properties() const override {
+        return { std::make_shared<Property>("name", adaptee->name) };
     };
 };
 

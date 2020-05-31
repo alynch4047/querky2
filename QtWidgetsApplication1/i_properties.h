@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <QString>
 #include <QList>
 
@@ -28,7 +30,7 @@ public:
 
 struct PropertyToIDisplay : Adapter<Property, IDisplay> {
     virtual QString get_name() const override { return adaptee->name; };
-    virtual QString get_icon_name() const override { return "006-monkey.png"; };
+    virtual QString get_icon_name() const override { return ""; };
 };
 
 struct PropertyToITreeData : Adapter<Property, ITreeData> {
@@ -36,14 +38,17 @@ struct PropertyToITreeData : Adapter<Property, ITreeData> {
         QList<Data*> children;
         return children;
     };
-    virtual QVariant data(int column) const { return "TBD"; };
+    virtual QVariant data(int column) const {
+        if (column == 1) return adaptee->val;
+        else return "TBD";
+    };
 };
 
 
 struct IProperties {
 
     IProperties() {};
-    virtual QList<Property> get_properties() const = 0;
+    virtual QList<std::shared_ptr<Property>> get_properties() const = 0;
 };
 
 struct PropertyPlugin : public Plugin {

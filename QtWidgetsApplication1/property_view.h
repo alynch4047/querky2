@@ -16,21 +16,20 @@ public:
         QObject::connect(&services->selection, &Selection::selectionChanged, this, &PropertyView::when_selection_changed);
     }
 
-    QList<Property> current_properties;
+    QList<std::shared_ptr<Property>> current_properties;
 
     void when_selection_changed(const Data* selection) {
         qInfo() << "services selection changed " << selection->name;
         model.clear();
 
         Data* data = const_cast<Data*>(selection);
-        //add_top_level_object(selection);
 
         IProperties* i_properties = adapt<IProperties>(data);
         if (i_properties == nullptr) return;
-        // keep a copy of properties for lifetime of view
+        // keep a copy of QList for lifetime of view
         current_properties = i_properties->get_properties();
-        for (Property& property : current_properties) {
-            add_top_level_object(&property);
+        for (auto& property : current_properties) {
+            add_top_level_object(property.get());
         }
         
         refresh();

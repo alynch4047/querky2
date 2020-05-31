@@ -20,8 +20,11 @@ public:
 };
 
 struct BookToIProperties : Adapter<Book, IProperties> {
-    QList<Property> get_properties() const override {
-            return { Property("name", adaptee->name), Property("author", adaptee->author) };
+    QList<std::shared_ptr<Property>> get_properties() const override {
+            return {
+                std::make_shared<Property>("name", adaptee->name), 
+                std::make_shared<Property>("author", adaptee->author) 
+            };
     };
 };
 
