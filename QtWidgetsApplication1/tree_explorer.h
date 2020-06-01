@@ -11,6 +11,10 @@ public:
     TreeExplorer(QWidget* parent, QList<QString> headers, Services* services) :
         TreeDataView(parent, headers, services) {
         QObject::connect(selection_model.get(), &QItemSelectionModel::selectionChanged, this, &TreeExplorer::when_selection_changed);
+        QObject::connect(services, &Services::data_changed, this, [this]() {
+            refresh(); 
+            qDebug() << "tree explorer data changed\n" ;
+        });
     }
 
     void when_selection_changed(const QItemSelection& selected, const QItemSelection& deselected) {

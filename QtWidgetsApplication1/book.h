@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include <QString>
 #include <QList>
 
@@ -19,6 +21,7 @@ public:
     QString author;
     int num_pages;
 };
+
 
 struct BookToIProperties : Adapter<Book, IProperties> {
     QList<std::shared_ptr<Property>> get_properties() const override {

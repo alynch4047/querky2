@@ -86,9 +86,11 @@
     <ClCompile Include="icon.cpp" />
     <ClCompile Include="i_properties.cpp" />
     <ClCompile Include="list_explorer.cpp" />
+    <ClCompile Include="node.cpp" />
     <ClCompile Include="property_view.cpp" />
     <ClCompile Include="selection.cpp" />
     <ClCompile Include="services.cpp" />
+    <ClCompile Include="tree_data_model.cpp" />
     <ClCompile Include="tree_data_view.cpp" />
     <ClCompile Include="tree_explorer.cpp" />
     <QtUic Include="QtWidgetsApplication1.ui" />
@@ -104,6 +106,7 @@
   <ItemGroup>
     <ClInclude Include="adapt.h" />
     <ClInclude Include="book.h" />
+    <ClInclude Include="node.h" />
     <ClInclude Include="plugins.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="emp.h" />
@@ -117,6 +120,7 @@
     <QtMoc Include="selection.h" />
     <QtMoc Include="services.h" />
     <ClInclude Include="tree_data_view.h" />
+    <QtMoc Include="tree_data_model.h" />
     <ClInclude Include="tree_explorer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

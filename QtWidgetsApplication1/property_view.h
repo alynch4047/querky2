@@ -17,6 +17,7 @@ public:
         TreeDataView(parent, headers, services) {
         QObject::connect(&services->selection, &Selection::selectionChanged, this, &PropertyView::when_selection_changed);
         QObject::connect(this, &PropertyView::data_changed, this->services, &Services::data_changed);
+        QObject::connect(&model, &TreeDataModel::data_changed, this, &PropertyView::data_changed);
     }
 
     QList<std::shared_ptr<Property>> current_properties;
@@ -37,7 +38,6 @@ public:
         
         refresh();
 
-        emit data_changed();
     }
 
 signals:

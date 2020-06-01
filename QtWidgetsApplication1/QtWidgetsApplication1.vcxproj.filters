@@ -74,6 +74,12 @@
     <ClCompile Include="main_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_data_model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="adapt.h">
@@ -106,13 +112,16 @@
     <ClInclude Include="i_treedata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tree_data_view.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tree_explorer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="plugins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_data_view.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -127,6 +136,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="services.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="tree_data_model.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
