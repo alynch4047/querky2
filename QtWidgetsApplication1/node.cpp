@@ -59,6 +59,12 @@ void Node::refresh(TreeDataModel& model) {
             model.update_data(this, data);
         }
     }
+    else {
+        // for root node update_data for all chilren
+        for (Node* node : children) {
+            model.update_data(this, node->data);
+        }
+    }
     for (Node* child : children) {
         child->refresh(model);
     }
