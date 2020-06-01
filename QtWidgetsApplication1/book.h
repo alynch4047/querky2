@@ -14,7 +14,7 @@
 class Book : public IAdaptable {
 public:
     const static std::string data_type_id;
-    virtual const std::string get_data_type_id() override { return "BOOK"; };
+    virtual const std::string get_data_type_id() override { return Book::data_type_id; };
     Book(QString name, QString author, int num_pages) : name(name), author(author), num_pages(num_pages) {};
 
     QString name;

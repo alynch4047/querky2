@@ -18,7 +18,7 @@ class Property: public IAdaptable {
 public:
 
     const static std::string data_type_id;
-    virtual const std::string get_data_type_id() override { return "PROPERTY"; };
+    virtual const std::string get_data_type_id() override { return Property::data_type_id; };
 
     QString name;
     std::function<QVariant()> getter;
@@ -50,9 +50,6 @@ struct PropertyToITreeData : Adapter<Property, ITreeData> {
         return true;
     };
 };
-
-
-
 
 struct IProperties {
 
