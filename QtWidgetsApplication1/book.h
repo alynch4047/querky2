@@ -49,7 +49,7 @@ struct BookToITreeData : Adapter<Book, ITreeData> {
         QList<IAdaptable*> children;
         return children;
     }
-    virtual QVariant data(int column) const { return "TBD"; }
+    virtual QVariant data(int column) const { return adaptee->num_pages; }
     virtual bool is_editable(int column) const { return false; }
     virtual bool set_data(int column, QVariant value) const { return false; };
 };

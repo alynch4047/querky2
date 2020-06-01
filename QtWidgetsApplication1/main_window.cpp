@@ -41,7 +41,7 @@ void MainWindow::create_docks(Services* services) {
     addDockWidget(Qt::LeftDockWidgetArea, dock);
 
     dock = new QDockWidget("Tree Explorer", this);
-    TreeExplorer* tree_explorer = new TreeExplorer(dock, { "Data" }, services);
+    TreeExplorer* tree_explorer = new TreeExplorer(dock, { "Data", "Detail" }, services);
 
     for (const auto* data : services->all_objects) {
         tree_explorer->add_top_level_object(data);

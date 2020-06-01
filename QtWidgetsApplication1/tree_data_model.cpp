@@ -25,8 +25,10 @@ void TreeDataModel::update_data(Node* parent_node, const IAdaptable* child_data)
     qDebug() << "update model data" << name << '\n';
     for (int row = 0; row < parent_node->children.size(); ++row) {
         if (parent_node->children[row]->data == child_data) {
-            QModelIndex index = createIndex(row, 0, parent_node->children[row]);
-            emit dataChanged(index, index);
+            for (int col_no = 0; col_no < columnCount(); ++col_no) {
+                QModelIndex index = createIndex(row, col_no, parent_node->children[row]);
+                emit dataChanged(index, index);
+            }
             break;
         }
     }

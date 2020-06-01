@@ -17,6 +17,7 @@ class Emp : public IAdaptable {
 public:
     const static std::string data_type_id;
     virtual const std::string get_data_type_id() override { return Emp::data_type_id; };
+
     Emp(QString name, int salary) : name(name), salary(salary) {};
 
     QString name;
