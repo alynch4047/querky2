@@ -17,9 +17,6 @@ template<typename AdapteeType, typename Interface> struct Adapter : Interface {
 
     AdapteeType* adaptee = nullptr;
 
-    void setAdaptee(AdapteeType* obj) {
-        adaptee = obj;
-    }
 };
 
 // Introduce IBuild base class to force adapt<> to recognise 'polymorphism' of Factory<>
@@ -60,7 +57,7 @@ template<typename Interface, typename Adaptee> Interface* adapt(Adaptee* obj) {
 
     Adapter<Adaptee, Interface>* adapter = static_cast<Adapter<Adaptee, Interface>*>(factory->build());
     //std::cout << "ADAPTER " << typeid(adapter).name() << ' ' << adapter << '\n';
-    adapter->setAdaptee(obj);
+    adapter->adaptee = obj;
     // adapter already implements Interface
     return adapter;
 };
