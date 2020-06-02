@@ -18,7 +18,7 @@ public:
     const static std::string data_type_id;
     virtual const std::string get_data_type_id() override { return Emp::data_type_id; };
 
-    Emp(QString name, int salary) : name(name), salary(salary) {};
+    Emp(QString name, int salary): name(name), salary(salary) {};
 
     QString name;
     int salary;
@@ -28,7 +28,9 @@ public:
 
 struct EmpToIProperties : Adapter<Emp, IProperties> {
     QList<std::shared_ptr<Property>> get_properties() const override {
-        return { std::make_shared<Property>("name", [this]() {return adaptee->name; }, [this](QVariant v) {adaptee->name = v.toString(); }) };
+        return { std::make_shared<Property>("name",
+            [this]() {return adaptee->name; },
+            [this](QVariant v) {adaptee->name = v.toString(); }) };
     }
 };
 
