@@ -30,6 +30,12 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 
     create_docks(&services);
 
+    auto* widget = new QWidget(this);
+    widget->setMaximumHeight(0);
+    widget->setMaximumWidth(0);
+
+    setCentralWidget(widget);
+
 }
 
 
@@ -53,6 +59,7 @@ void MainWindow::create_docks(Services* services) {
     PropertyView* properties = new PropertyView(dock, {"Name", "Value"}, services);
     dock->setWidget(properties);
     addDockWidget(Qt::RightDockWidgetArea, dock);
+
 }
 
 
