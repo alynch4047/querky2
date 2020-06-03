@@ -18,8 +18,6 @@
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent)
 {
-    ui.setupUi(this);
-
     load_plugins();
 
     // load initial data

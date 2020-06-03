@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QMainWindow>
-#include "ui_QtWidgetsApplication1.h"
+
 #include "services.h"
 
 class MainWindow : public QMainWindow
@@ -13,6 +13,4 @@ public:
 
     void create_docks(Services* services);
 
-private:
-    Ui::QtWidgetsApplication1Class ui;
 };

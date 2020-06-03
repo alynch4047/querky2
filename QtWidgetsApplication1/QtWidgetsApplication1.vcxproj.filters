@@ -24,11 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="QtWidgetsApplication1.ui">
-      <Filter>Resource Files</Filter>
-    </QtUic>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
